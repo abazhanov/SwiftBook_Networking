@@ -31,6 +31,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <state key="normal" title="POST"/>
+                                <connections>
+                                    <action selector="postRequest:" destination="zdb-B4-EG3" eventType="touchUpInside" id="dhh-Fo-hZD"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="npX-BG-oSd">
                                 <rect key="frame" x="20" y="286" width="374" height="76"/>
