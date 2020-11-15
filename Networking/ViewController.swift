@@ -9,43 +9,44 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var getImageButton: UIButton!
     
-    @IBOutlet weak var activitiIndicator: UIActivityIndicatorView!
+    @IBAction func getRequest(_ sender: Any) {
+        guard let url = URL(string: "https://jsonplaceholder.typicode.com/posts") else { return }
+        let session = URLSession.shared
+        session.dataTask(with: url) { (data, response, error) in
+            guard let response = response,
+                let data = data
+                else {return}
+            print(response)
+            print(data)
+            
+            //сериализируем полученные данные, т.е. приводим к читаемому формату
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                print(json) //Теперь в json лежит массив данных
+            } catch {
+                print(error)
+            }
+            
+            
+        }.resume()
+        }
+        
+    
+    
+    
+    
+    
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        activitiIndicator.isHidden = true
-        activitiIndicator.hidesWhenStopped = true
-        
-    }
 
-    @IBAction func getImagePressed(_ sender: Any) {
-        
-        label.isHidden = true
-        getImageButton.isEnabled = false
-        activitiIndicator.isHidden = false
-        activitiIndicator.startAnimating()
-        
-        guard let url = URL(string: "https://applelives.com/wp-content/uploads/2016/03/iPhone-SE-11.jpeg") else {return}
-        
-        let session = URLSession.shared
-        
-        session.dataTask(with: url) { (data, response, error) in
-            if let date = data, let image = UIImage(data: date) {
-                DispatchQueue.main.async {
-                    self.activitiIndicator.stopAnimating()
-                    self.imageView.image = image
-                }
-            }
-        }.resume()
-        
+        // Do any additional setup after loading the view.
     }
     
 
-}
+   
 
+}
